@@ -79,6 +79,10 @@ public class PlayerMoveController : MonoBehaviour
             isJumping = true;
             isGrounded = false;
         }
+        if (isJumping == true)
+        {
+            ChangeAnimationState(PlayerState.JUMPING);
+        }
     }
   
 }
