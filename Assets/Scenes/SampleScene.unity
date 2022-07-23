@@ -1231,5 +1231,13 @@ PrefabInstance:
       propertyPath: pointer
       value: 
       objectReference: {fileID: 615101413}
+    - target: {fileID: 9212989224483598561, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
+      propertyPath: aimTarget
+      value: 
+      objectReference: {fileID: 486928149}
+    - target: {fileID: 9212989224483598561, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
+      propertyPath: aimPosition
+      value: 
+      objectReference: {fileID: 486928149}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}

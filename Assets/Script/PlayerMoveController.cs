@@ -15,7 +15,7 @@ public class PlayerMoveController : MonoBehaviour
     private Animator animator;
     private string currentState;
 
-    public Transform pointer;
+    public Transform aimTarget;
     public Transform groundPos;
     public LayerMask ground;
 
@@ -36,6 +36,8 @@ public class PlayerMoveController : MonoBehaviour
        animator = GetComponent<Animator>(); 
        state = PlayerState.IDLE;
     }
+
+    //Enum to set the current state for animation
     void ChangeAnimationState(PlayerState newState)
     {
         string animName = string.Empty;
@@ -56,20 +58,26 @@ public class PlayerMoveController : MonoBehaviour
                 break;
         }
         animator.Play(animName);
+        Debug.Log(animName);
     }
+
     private void FixedUpdate()
     {
         var movement = Input.GetAxis("Horizontal");
         if (movement != 0)
         {
             rb2d.transform.position += new Vector3(movement, 0, 0) * moveSpeed * Time.fixedDeltaTime;
-            ChangeAnimationState(PlayerState.MOVING);
+            if (isGrounded == true)
+            {
+                ChangeAnimationState(PlayerState.MOVING);
+            }
         }
         else if (movement == 0 && isGrounded == true)
         {
             ChangeAnimationState(PlayerState.IDLE);
         }
     }
+
     void Update()
     {
         //Jumping and Ground Check
@@ -80,10 +88,14 @@ public class PlayerMoveController : MonoBehaviour
             isJumping = true;
             isGrounded = false;
         }
-        if (isJumping == true)
+        if (isGrounded == false)
         {
             ChangeAnimationState(PlayerState.JUMPING);
-        }        
+        }
+        if (isGrounded == true)
+        {
+            isJumping = false;
+        }
     }  
     public bool Grounded
     {

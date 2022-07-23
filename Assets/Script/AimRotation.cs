@@ -24,7 +24,7 @@ public class AimRotation : MonoBehaviour
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
         /*If player grounded, rotation were limitted to 180 degree(only straight dash allowed
-        depend on where the player cursor facing*/
+          depend on where the player cursor facing*/
         if (rotZ < 0 && rotZ > -90 && playerScript.Grounded == true)
         {
             rotZ = rotZ + -rotZ;
@@ -43,6 +43,6 @@ public class AimRotation : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, rotZ);
         }
         
-        Debug.Log(rotZ);
+        //Debug.Log(rotZ);
     }
 }
