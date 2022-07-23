@@ -85,4 +85,9 @@ public class PlayerMoveController : MonoBehaviour
             ChangeAnimationState(PlayerState.JUMPING);
         }        
     }  
+    public bool Grounded
+    {
+        get { return isGrounded; }
+        set { isGrounded = value; }
+    }
 }
