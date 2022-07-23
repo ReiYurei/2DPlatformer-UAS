@@ -15,6 +15,7 @@ public class PlayerMoveController : MonoBehaviour
     private Animator animator;
     private string currentState;
 
+    public Transform pointer;
     public Transform groundPos;
     public LayerMask ground;
 
@@ -27,14 +28,13 @@ public class PlayerMoveController : MonoBehaviour
     private bool isJumping;
     private bool isGrounded;
     private bool isAttacking;
-    
+
 
     void Start()
     {
        rb2d = GetComponent<Rigidbody2D>();
        animator = GetComponent<Animator>(); 
-
-        state = PlayerState.IDLE;
+       state = PlayerState.IDLE;
     }
     void ChangeAnimationState(PlayerState newState)
     {
@@ -72,6 +72,7 @@ public class PlayerMoveController : MonoBehaviour
     }
     void Update()
     {
+        //Jumping and Ground Check
         isGrounded = Physics2D.OverlapCircle(groundPos.position, 0.325f, ground);
         if (Input.GetButtonDown("Jump") == true && isGrounded == true)
         {
@@ -82,7 +83,6 @@ public class PlayerMoveController : MonoBehaviour
         if (isJumping == true)
         {
             ChangeAnimationState(PlayerState.JUMPING);
-        }
-    }
-  
+        }        
+    }  
 }
