@@ -13,9 +13,10 @@ public class PlayerMoveController : MonoBehaviour
     public PlayerState state;
     private Rigidbody2D rb2d;
     private Animator animator;
-    private string currentState;
+    public SpriteRenderer pointerSprite;
 
     public Transform aimTarget;
+    private Vector3 currentTarget;
     public Transform groundPos;
     public LayerMask ground;
 
@@ -24,10 +25,12 @@ public class PlayerMoveController : MonoBehaviour
 
     private int attackMaxCount;
     private int attackCurrentCount;
-    private int attackDelay;
+    private float attackDelay;
     private bool isJumping;
     private bool isGrounded;
     private bool isAttacking;
+    private bool isAbleToAttack = true;
+
 
 
     void Start()
@@ -35,31 +38,10 @@ public class PlayerMoveController : MonoBehaviour
        rb2d = GetComponent<Rigidbody2D>();
        animator = GetComponent<Animator>(); 
        state = PlayerState.IDLE;
+       //currentTarget = new List<Vector3>();
     }
 
-    //Enum to set the current state for animation
-    void ChangeAnimationState(PlayerState newState)
-    {
-        string animName = string.Empty;
-        switch (newState)
-        {
-            case PlayerState.IDLE:
-                animName = "characterIdle";
-                break;
-
-            case PlayerState.MOVING:
-                animName = "characterMove";
-                break;
-            case PlayerState.JUMPING:
-                animName = "characterJump";
-                break;
-            case PlayerState.ATTACKING:
-                animName = "characterAttack";
-                break;
-        }
-        animator.Play(animName);
-        Debug.Log(animName);
-    }
+    
 
     private void FixedUpdate()
     {
@@ -76,6 +58,9 @@ public class PlayerMoveController : MonoBehaviour
         {
             ChangeAnimationState(PlayerState.IDLE);
         }
+       
+
+        
     }
 
     void Update()
@@ -88,7 +73,7 @@ public class PlayerMoveController : MonoBehaviour
             isJumping = true;
             isGrounded = false;
         }
-        if (isGrounded == false)
+        if (isGrounded == false && isAttacking == false)
         {
             ChangeAnimationState(PlayerState.JUMPING);
         }
@@ -96,10 +81,65 @@ public class PlayerMoveController : MonoBehaviour
         {
             isJumping = false;
         }
-    }  
+        //Attacking
+        if (Input.GetButtonDown("Attack") && isAbleToAttack == true)
+        {
+
+            ChangeAnimationState(PlayerState.ATTACKING);
+            isAttacking = true;
+            isAbleToAttack = false;
+        }
+        //Attack Recovery
+        if (isAttacking == true)
+        {
+            rb2d.velocity = Vector3.zero;
+            rb2d.gravityScale = 0;
+            attackDelay -= Time.fixedDeltaTime;
+            transform.position = Vector3.Lerp(transform.position, currentTarget, 1f * Time.fixedDeltaTime);
+            if (attackDelay <= 0)
+            {
+                rb2d.gravityScale = 4;
+                //rb2d.bodyType = RigidbodyType2D.Dynamic;
+                attackDelay = 0;
+                isAbleToAttack = true;
+                isAttacking = false;
+                pointerSprite.enabled = true;
+            }
+        }
+
+    }
     public bool Grounded
     {
         get { return isGrounded; }
         set { isGrounded = value; }
+    }
+    //Enum to set the current state for animation
+    void ChangeAnimationState(PlayerState newState)
+    {
+        if (state == newState) return;
+        state = newState;
+        string animName = string.Empty;
+        switch (newState)
+        {
+            case PlayerState.IDLE:
+                animName = "characterIdle";
+                break;
+            case PlayerState.MOVING:
+                animName = "characterMove";
+                break;
+            case PlayerState.JUMPING:
+                animName = "characterJump";
+                break;
+            case PlayerState.ATTACKING:
+                animName = "characterAttack";
+                pointerSprite.enabled = false;
+                //rb2d.bodyType = RigidbodyType2D.Kinematic;            
+                currentTarget = aimTarget.position;
+                attackDelay = 5f;
+
+                break;
+        }
+        animator.Play(animName);
+        Debug.Log(animName);
     }
 }

@@ -365,8 +365,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 486928148}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: 0, z: 0}
-  m_LocalScale: {x: 1.3333334, y: 1.3333334, z: 1}
+  m_LocalPosition: {x: 6.45, y: 0, z: 0}
+  m_LocalScale: {x: 0.20000002, y: 0.20000002, z: 0.2}
   m_Children: []
   m_Father: {fileID: 785711068}
   m_RootOrder: 1
@@ -382,6 +382,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -397,6 +398,21 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f14d13a82848f7b4db7390cc5131e12d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1650871455}
+  offset: {x: 0, y: 0, z: -10}
+  smoothSpeed: 7
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1183,6 +1199,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9212989224483598556, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9212989224483598556, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
+      propertyPath: m_GravityScale
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9212989224483598556, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9212989224483598559, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1239,5 +1267,13 @@ PrefabInstance:
       propertyPath: aimPosition
       value: 
       objectReference: {fileID: 486928149}
+    - target: {fileID: 9212989224483598561, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
+      propertyPath: currentTarget
+      value: 
+      objectReference: {fileID: 486928149}
+    - target: {fileID: 9212989224483598561, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
+      propertyPath: pointerSprite
+      value: 
+      objectReference: {fileID: 615101414}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
