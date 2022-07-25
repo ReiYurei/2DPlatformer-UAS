@@ -85,11 +85,12 @@ public class PlayerMoveController : MonoBehaviour
 
 
         //Attacking
-        if (Input.GetButtonDown("Attack") && isAbleToAttack == true)
+        if (Input.GetButtonDown("Attack") && isAbleToAttack == true && attackCurrentCount > 0)
         {
             ChangeAnimationState(PlayerState.ATTACKING);
             isAttacking = true;
             isAbleToAttack = false;
+            attackCurrentCount--;
         }
         //Attack Recovery
         if (isAttacking == true)
