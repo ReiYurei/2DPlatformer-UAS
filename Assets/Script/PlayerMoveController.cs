@@ -38,13 +38,13 @@ public class PlayerMoveController : MonoBehaviour
        rb2d = GetComponent<Rigidbody2D>();
        animator = GetComponent<Animator>(); 
        state = PlayerState.IDLE;
-       //currentTarget = new List<Vector3>();
     }
 
     
 
     private void FixedUpdate()
     {
+        //Moving
         var movement = Input.GetAxis("Horizontal");
         if (movement != 0 && isAbleToAttack == true)
         {
@@ -54,7 +54,7 @@ public class PlayerMoveController : MonoBehaviour
                 ChangeAnimationState(PlayerState.MOVING);
             }
         }
-        else if (movement == 0 && isGrounded == true)
+        else if (movement == 0 && isGrounded == true && isAbleToAttack == true)
         {
             ChangeAnimationState(PlayerState.IDLE);
         }
@@ -112,6 +112,7 @@ public class PlayerMoveController : MonoBehaviour
         }
 
     }
+   
     public bool Grounded
     {
         get { return isGrounded; }
