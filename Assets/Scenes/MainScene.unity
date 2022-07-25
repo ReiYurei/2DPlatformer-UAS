@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &91741791 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 929978432701682042, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
+  m_PrefabInstance: {fileID: 929978433459564199}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4201aa73228b124c8a838d75a0c4c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &235441019
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +302,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.7
 --- !u!1 &392369632
 GameObject:
   m_ObjectHideFlags: 0
@@ -2004,21 +2015,37 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 929978432701682044, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
+      propertyPath: m_TagString
+      value: Aim
+      objectReference: {fileID: 0}
+    - target: {fileID: 929978433236923777, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 929978433236923777, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 929978433236923777, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 929978433236923779, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
       propertyPath: m_Size.x
-      value: 0.8803089
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 929978433236923779, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
       propertyPath: m_Size.y
-      value: 1.7529712
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 929978433236923779, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
       propertyPath: m_Offset.x
-      value: -0.10412803
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 929978433236923779, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
       propertyPath: m_Offset.y
-      value: 0.0023292303
+      value: -0.07
       objectReference: {fileID: 0}
     - target: {fileID: 929978433236923779, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -2032,13 +2059,21 @@ PrefabInstance:
       propertyPath: dmgDeal
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 929978433236923781, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
+      propertyPath: aimScript
+      value: 
+      objectReference: {fileID: 91741791}
+    - target: {fileID: 929978433236923781, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
+      propertyPath: aimRotationScript
+      value: 
+      objectReference: {fileID: 91741791}
     - target: {fileID: 929978433236923783, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 929978433426818473, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.837
+      value: -0.8
       objectReference: {fileID: 0}
     - target: {fileID: 929978433965384248, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
       propertyPath: m_RootOrder

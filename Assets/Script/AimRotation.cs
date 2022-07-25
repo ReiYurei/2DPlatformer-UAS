@@ -8,7 +8,7 @@ public class AimRotation : MonoBehaviour
     private Vector3 mousePos;
     private PlayerMoveController playerScript;
     private float rotZ;
-
+    private bool isFacingRight;
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -47,7 +47,29 @@ public class AimRotation : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, rotZ);
         }
 
-        //Debug.Log(rotZ);
+
+        
+    }
+    public void FacingState()  //If it's coordinate is 90 to -90, it's facing right
+
+    {
+        if (playerScript.state == PlayerState.ATTACKING)
+        {
+            if (rotZ <= 90 && rotZ >= -90)
+            {
+                isFacingRight = true;
+            }
+            else
+            {
+                isFacingRight = false;
+            }
+        }
+
+    }
+    public bool FacingRight
+    {
+        get { return isFacingRight; }
+        set { isFacingRight = value; }
     }
     public float mouseAngle
     {

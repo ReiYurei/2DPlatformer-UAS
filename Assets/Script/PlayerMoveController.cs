@@ -14,6 +14,7 @@ public class PlayerMoveController : MonoBehaviour
     private Rigidbody2D rb2d;
     private Animator animator;
     public SpriteRenderer pointerSprite;
+    private AimRotation aimScript;
 
     public Transform aimTarget;
     private Vector3 currentTarget;
@@ -35,6 +36,7 @@ public class PlayerMoveController : MonoBehaviour
 
     void Start()
     {
+       aimScript = GameObject.FindGameObjectWithTag("Aim").GetComponent<AimRotation>();
        rb2d = GetComponent<Rigidbody2D>();
        animator = GetComponent<Animator>(); 
        state = PlayerState.IDLE;
@@ -60,19 +62,31 @@ public class PlayerMoveController : MonoBehaviour
             ChangeAnimationState(PlayerState.IDLE);
             pointerSprite.enabled = true; //Pointer Sprite renderer
         }
-       
 
+        //Flip the sprite
+      
+        if (movement > 0 || aimScript.FacingRight == true && isAttacking == true)
+        {
+                GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else if (movement < 0 || aimScript.FacingRight == false && isAttacking == true)
+        {
+                GetComponent<SpriteRenderer>().flipX = true;
+        }
         
+      
+
     }
 
     void Update()
     {
         //Jumping and Ground Check
-        isGrounded = Physics2D.OverlapBox(groundPos.position, new Vector2(0.325f, 0.1f), 1f, ground);
+        isGrounded = Physics2D.OverlapBox(groundPos.position, new Vector2(0.2f, 0.1f), 1f, ground);
         if (Input.GetButtonDown("Jump") == true && isGrounded == true)
         {
             rb2d.velocity += Vector2.up * jumpForce;
             isGrounded = false;
+            ChangeAnimationState(PlayerState.JUMPING);
         }
         if (isGrounded == false && isAttacking == false)
         {
@@ -128,8 +142,13 @@ public class PlayerMoveController : MonoBehaviour
                 pointerSprite.enabled = false; //Pointer Sprite renderer
             }
         }
-       
+      
 
+    }
+    public bool Attacking
+    {
+        get { return isAttacking; }
+        set { isAttacking = value; }
     }
     public bool Bouncing
     {
@@ -141,6 +160,7 @@ public class PlayerMoveController : MonoBehaviour
         get { return isGrounded; }
         set { isGrounded = value; }
     }
+
     //Enum to set the current state for animation
     void ChangeAnimationState(PlayerState newState)
     {
@@ -163,6 +183,7 @@ public class PlayerMoveController : MonoBehaviour
                 break;
             case PlayerState.ATTACKING:
                 animName = "characterAttack";
+                aimScript.FacingState();
                 pointerSprite.enabled = false; //Pointer Sprite renderer
                 currentTarget = aimTarget.position; //Set current target with aim target coordinate 1 time so it doesn't keep overwrite the value every update
                 attackDelay = 0.4f; //Time before player could attack again
@@ -174,6 +195,6 @@ public class PlayerMoveController : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        Gizmos.DrawCube(groundPos.position, new Vector2(0.325f, 0.1f));
+        Gizmos.DrawCube(groundPos.position, new Vector2(0.2f, 0.2f));
     }
 }

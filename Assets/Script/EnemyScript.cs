@@ -19,6 +19,8 @@ public class EnemyScript : MonoBehaviour
         {
             playerScript.Bouncing = true;
             targetRb.velocity = Vector2.zero;
+
+            //The Enemy will bounce the player up
             targetRb.transform.position = new Vector2(this.transform.position.x, this.transform.position.y+0.5f);
             targetRb.velocity = new Vector2(0, 20f); 
             Debug.Log(collision);
