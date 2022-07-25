@@ -42,44 +42,37 @@ public class PlayerMoveController : MonoBehaviour
        state = PlayerState.IDLE;
     }
 
-    
-
-    private void FixedUpdate()
+    void Update()
     {
         //Moving
         var movement = Input.GetAxis("Horizontal");
         if (movement != 0 && isAbleToAttack == true)
         {
-            rb2d.transform.position += new Vector3(movement, 0, 0) * moveSpeed * Time.fixedDeltaTime;
+            rb2d.transform.position += new Vector3(movement, 0, 0) * moveSpeed * Time.deltaTime;
             if (isGrounded == true)
             {
                 ChangeAnimationState(PlayerState.MOVING);
                 pointerSprite.enabled = true; //Pointer Sprite renderer
             }
         }
-        else if (movement == 0 && isGrounded == true && isAbleToAttack == true)
+        if (movement == 0 && isGrounded == true && isAbleToAttack == true)
         {
             ChangeAnimationState(PlayerState.IDLE);
             pointerSprite.enabled = true; //Pointer Sprite renderer
         }
 
         //Flip the sprite
-      
+
         if (movement > 0 || aimScript.FacingRight == true && isAttacking == true)
         {
-                GetComponent<SpriteRenderer>().flipX = false;
+            GetComponent<SpriteRenderer>().flipX = false;
         }
         else if (movement < 0 || aimScript.FacingRight == false && isAttacking == true)
         {
-                GetComponent<SpriteRenderer>().flipX = true;
+            GetComponent<SpriteRenderer>().flipX = true;
         }
-        
-      
 
-    }
 
-    void Update()
-    {
         //Jumping and Ground Check
         isGrounded = Physics2D.OverlapBox(groundPos.position, new Vector2(0.2f, 0.1f), 1f, ground);
         if (Input.GetButtonDown("Jump") == true && isGrounded == true)
