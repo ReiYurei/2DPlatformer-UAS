@@ -23,7 +23,7 @@ public class PlayerMoveController : MonoBehaviour
     private float moveSpeed = 5f;
     private float jumpForce = 15f;
 
-    private int attackMaxCount;
+    public int attackMaxCount = 2;
     private int attackCurrentCount;
     private float attackDelay;
     private bool isJumping;
@@ -46,7 +46,7 @@ public class PlayerMoveController : MonoBehaviour
     private void FixedUpdate()
     {
         var movement = Input.GetAxis("Horizontal");
-        if (movement != 0)
+        if (movement != 0 && isAbleToAttack == true)
         {
             rb2d.transform.position += new Vector3(movement, 0, 0) * moveSpeed * Time.fixedDeltaTime;
             if (isGrounded == true)
@@ -79,12 +79,14 @@ public class PlayerMoveController : MonoBehaviour
         }
         if (isGrounded == true)
         {
+            attackCurrentCount = attackMaxCount;
             isJumping = false;
         }
+
+
         //Attacking
         if (Input.GetButtonDown("Attack") && isAbleToAttack == true)
         {
-
             ChangeAnimationState(PlayerState.ATTACKING);
             isAttacking = true;
             isAbleToAttack = false;
@@ -92,14 +94,16 @@ public class PlayerMoveController : MonoBehaviour
         //Attack Recovery
         if (isAttacking == true)
         {
+            //Stop any speed and gravity that affected player, and then move within linear time toward target
             rb2d.velocity = Vector3.zero;
             rb2d.gravityScale = 0;
             attackDelay -= Time.fixedDeltaTime;
-            transform.position = Vector3.Lerp(transform.position, currentTarget, 1f * Time.fixedDeltaTime);
+            rb2d.position = Vector3.Lerp(transform.position, currentTarget, 6f * Time.fixedDeltaTime);
+        
+            //If the attack is finished, set gravity to normal
             if (attackDelay <= 0)
             {
                 rb2d.gravityScale = 4;
-                //rb2d.bodyType = RigidbodyType2D.Dynamic;
                 attackDelay = 0;
                 isAbleToAttack = true;
                 isAttacking = false;
@@ -132,14 +136,14 @@ public class PlayerMoveController : MonoBehaviour
                 break;
             case PlayerState.ATTACKING:
                 animName = "characterAttack";
-                pointerSprite.enabled = false;
-                //rb2d.bodyType = RigidbodyType2D.Kinematic;            
-                currentTarget = aimTarget.position;
-                attackDelay = 5f;
+                pointerSprite.enabled = false; //Pointer Sprite renderer
+                currentTarget = aimTarget.position; //Set current target with aim target coordinate 1 time so it doesn't keep overwrite the value every update
+                attackDelay = 5f; //Time before player could attack again
 
                 break;
         }
         animator.Play(animName);
         Debug.Log(animName);
     }
+
 }
