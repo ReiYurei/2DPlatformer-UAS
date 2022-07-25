@@ -112,7 +112,7 @@ public class PlayerMoveController : MonoBehaviour
             rb2d.velocity = Vector3.zero;
             rb2d.gravityScale = 0;
             attackDelay -= Time.deltaTime;
-            rb2d.position = Vector3.Lerp(transform.position, currentTarget, 6f * Time.deltaTime);
+            rb2d.position = Vector3.Lerp(transform.position, currentTarget, 6f * Time.fixedDeltaTime);
         
             //If the attack is finished, set gravity to normal
             if (attackDelay <= 0)
@@ -165,7 +165,7 @@ public class PlayerMoveController : MonoBehaviour
                 animName = "characterAttack";
                 pointerSprite.enabled = false; //Pointer Sprite renderer
                 currentTarget = aimTarget.position; //Set current target with aim target coordinate 1 time so it doesn't keep overwrite the value every update
-                attackDelay = 5f; //Time before player could attack again
+                attackDelay = 0.4f; //Time before player could attack again
 
                 break;
         }
