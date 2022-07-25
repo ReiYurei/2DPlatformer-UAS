@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum PlayerState
 {
-    IDLE, MOVING, JUMPING, ATTACKING
+    IDLE, MOVING, JUMPING, ATTACKING, BOUNCING
 }
 
 public class PlayerMoveController : MonoBehaviour
@@ -23,10 +23,10 @@ public class PlayerMoveController : MonoBehaviour
     private float moveSpeed = 5f;
     private float jumpForce = 15f;
 
-    public int attackMaxCount = 2;
+    public int attackMaxCount = 1;
     private int attackCurrentCount;
     private float attackDelay;
-    private bool isJumping;
+    private bool isBouncing;
     private bool isGrounded;
     private bool isAttacking;
     private bool isAbleToAttack = true;
@@ -52,11 +52,13 @@ public class PlayerMoveController : MonoBehaviour
             if (isGrounded == true)
             {
                 ChangeAnimationState(PlayerState.MOVING);
+                pointerSprite.enabled = true; //Pointer Sprite renderer
             }
         }
         else if (movement == 0 && isGrounded == true && isAbleToAttack == true)
         {
             ChangeAnimationState(PlayerState.IDLE);
+            pointerSprite.enabled = true; //Pointer Sprite renderer
         }
        
 
@@ -66,11 +68,10 @@ public class PlayerMoveController : MonoBehaviour
     void Update()
     {
         //Jumping and Ground Check
-        isGrounded = Physics2D.OverlapCircle(groundPos.position, 0.325f, ground);
+        isGrounded = Physics2D.OverlapBox(groundPos.position, new Vector2(0.325f, 0.1f), 1f, ground);
         if (Input.GetButtonDown("Jump") == true && isGrounded == true)
         {
             rb2d.velocity += Vector2.up * jumpForce;
-            isJumping = true;
             isGrounded = false;
         }
         if (isGrounded == false && isAttacking == false)
@@ -80,9 +81,7 @@ public class PlayerMoveController : MonoBehaviour
         if (isGrounded == true)
         {
             attackCurrentCount = attackMaxCount;
-            isJumping = false;
         }
-
 
         //Attacking
         if (Input.GetButtonDown("Attack") && isAbleToAttack == true && attackCurrentCount > 0)
@@ -91,9 +90,23 @@ public class PlayerMoveController : MonoBehaviour
             isAttacking = true;
             isAbleToAttack = false;
             attackCurrentCount--;
+            
         }
+        //Bouncing
+        if (isBouncing == true)
+        {
+            ChangeAnimationState(PlayerState.BOUNCING);
+            attackCurrentCount = attackMaxCount;
+            rb2d.gravityScale = 4;
+            attackDelay = 0;
+            isAbleToAttack = true;
+            isAttacking = false;
+            pointerSprite.enabled = true;
+            isBouncing = false;
+        }
+ 
         //Attack Recovery
-        if (isAttacking == true)
+        if (isAttacking == true && isBouncing == false)
         {
             //Stop any speed and gravity that affected player, and then move within linear time toward target
             rb2d.velocity = Vector3.zero;
@@ -110,10 +123,19 @@ public class PlayerMoveController : MonoBehaviour
                 isAttacking = false;
                 pointerSprite.enabled = true;
             }
+            if (attackCurrentCount <= 0)
+            {
+                pointerSprite.enabled = false; //Pointer Sprite renderer
+            }
         }
+       
 
     }
-   
+    public bool Bouncing
+    {
+        get { return isBouncing; }
+        set { isBouncing = value; }
+    }
     public bool Grounded
     {
         get { return isGrounded; }
@@ -136,6 +158,9 @@ public class PlayerMoveController : MonoBehaviour
             case PlayerState.JUMPING:
                 animName = "characterJump";
                 break;
+            case PlayerState.BOUNCING:
+                animName = "characterBounce";
+                break;
             case PlayerState.ATTACKING:
                 animName = "characterAttack";
                 pointerSprite.enabled = false; //Pointer Sprite renderer
@@ -147,5 +172,8 @@ public class PlayerMoveController : MonoBehaviour
         animator.Play(animName);
         Debug.Log(animName);
     }
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(groundPos.position, new Vector2(0.325f, 0.1f));
+    }
 }

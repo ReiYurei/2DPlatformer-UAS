@@ -8,5 +8,6 @@ public class UnitStatus : MonoBehaviour
     public int dmgDeal;
 
     public int maxHP;
-    public int currentHP; 
+    private int currentHP; 
+    
 }

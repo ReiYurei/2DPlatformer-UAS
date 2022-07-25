@@ -328,7 +328,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 8
-  attackMaxCount: 2
+  attackMaxCount: 1
 --- !u!95 &929978433236923782
 Animator:
   serializedVersion: 3
