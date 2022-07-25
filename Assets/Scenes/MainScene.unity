@@ -2022,11 +2022,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 929978433236923779, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1
+      value: 2.6666667
       objectReference: {fileID: 0}
     - target: {fileID: 929978433236923779, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1
+      value: 2.6666667
       objectReference: {fileID: 0}
     - target: {fileID: 929978433236923780, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
       propertyPath: dmgDeal
