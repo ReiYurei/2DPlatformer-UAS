@@ -111,8 +111,8 @@ public class PlayerMoveController : MonoBehaviour
             //Stop any speed and gravity that affected player, and then move within linear time toward target
             rb2d.velocity = Vector3.zero;
             rb2d.gravityScale = 0;
-            attackDelay -= Time.fixedDeltaTime;
-            rb2d.position = Vector3.Lerp(transform.position, currentTarget, 6f * Time.fixedDeltaTime);
+            attackDelay -= Time.deltaTime;
+            rb2d.position = Vector3.Lerp(transform.position, currentTarget, 6f * Time.deltaTime);
         
             //If the attack is finished, set gravity to normal
             if (attackDelay <= 0)
