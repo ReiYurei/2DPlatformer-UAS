@@ -11,6 +11,7 @@ public class PlayerMoveController : MonoBehaviour
 {
 
     public PlayerState state;
+    private UnitStatus status;
     private Rigidbody2D rb2d;
     private Animator animator;
     public SpriteRenderer pointerSprite;
@@ -36,6 +37,7 @@ public class PlayerMoveController : MonoBehaviour
 
     void Start()
     {
+       status = this.GetComponent<UnitStatus>();
        aimScript = GameObject.FindGameObjectWithTag("Aim").GetComponent<AimRotation>();
        rb2d = GetComponent<Rigidbody2D>();
        animator = GetComponent<Animator>(); 
@@ -122,9 +124,7 @@ public class PlayerMoveController : MonoBehaviour
         }
         //Bouncing
         if (isBouncing == true)
-        {
-           
-            
+        {          
             ResetGroundPosition();
             ResetStatus();
             attackCurrentCount = attackMaxCount;      
@@ -153,12 +153,11 @@ public class PlayerMoveController : MonoBehaviour
                 pointerSprite.enabled = false; //Pointer Sprite renderer
             }
         }
-
-        Debug.Log(groundPos.localPosition);
     }
     void ResetStatus()
     {
         rb2d.transform.rotation = Quaternion.Euler(Vector3.zero);
+        GameObject.FindGameObjectWithTag("Hurtbox").GetComponent<BoxCollider2D>().enabled = true;
         rb2d.gravityScale = 4;
         attackDelay = 0;
         isAbleToAttack = true;
@@ -208,6 +207,7 @@ public class PlayerMoveController : MonoBehaviour
                 break;
             case PlayerState.ATTACKING:
                 animName = "characterAttack";
+                GameObject.FindGameObjectWithTag("Hurtbox").GetComponent<BoxCollider2D>().enabled = false;
                 aimScript.FacingState();
                 aimScript.Angle();
                 pointerSprite.enabled = false; //Pointer Sprite renderer
@@ -217,7 +217,7 @@ public class PlayerMoveController : MonoBehaviour
                 break;
         }
         animator.Play(animName);
-        Debug.Log(animName);
+        //Debug.Log(animName);
     }
     private void OnDrawGizmos()
     {
