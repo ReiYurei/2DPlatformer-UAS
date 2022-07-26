@@ -53,6 +53,10 @@ public class UnitStatus : MonoBehaviour
         collider.enabled = true;
         spriteRenderer.color = Color.red;
     }
+    public void PlayerDies()
+    {
+
+    }
     public int HealthPoint
     {
         get { return currentHP; }
