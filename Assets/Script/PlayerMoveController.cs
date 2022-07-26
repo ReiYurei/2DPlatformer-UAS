@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum PlayerState
 {
-    IDLE, MOVING, JUMPING, ATTACKING, BOUNCING
+    IDLE, MOVING, JUMPING, ATTACKING
 }
 
 public class PlayerMoveController : MonoBehaviour
@@ -41,6 +41,13 @@ public class PlayerMoveController : MonoBehaviour
        animator = GetComponent<Animator>(); 
        state = PlayerState.IDLE;
     }
+    private void FixedUpdate()
+    {
+        if (groundPos.parent == null)
+        {
+            groundPos.position = rb2d.transform.position + new Vector3(0,-0.8f,0);
+        }
+    }
 
     void Update()
     {
@@ -62,16 +69,30 @@ public class PlayerMoveController : MonoBehaviour
         }
 
         //Flip the sprite
-
-        if (movement > 0 || aimScript.FacingRight == true && isAttacking == true)
+            //Flip when movement
+        if (movement > 0)
         {
             GetComponent<SpriteRenderer>().flipX = false;
         }
-        else if (movement < 0 || aimScript.FacingRight == false && isAttacking == true)
+        else if (movement < 0)
         {
             GetComponent<SpriteRenderer>().flipX = true;
         }
 
+            //Flip when attacking
+        if (aimScript.FacingRight == true && isAttacking == true)
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else if (aimScript.FacingRight == false && isAttacking == true)
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+            GetComponent<SpriteRenderer>().flipY = true;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().flipY = false;
+        }
 
         //Jumping and Ground Check
         isGrounded = Physics2D.OverlapBox(groundPos.position, new Vector2(0.2f, 0.1f), 1f, ground);
@@ -102,7 +123,9 @@ public class PlayerMoveController : MonoBehaviour
         //Bouncing
         if (isBouncing == true)
         {
-            ChangeAnimationState(PlayerState.BOUNCING);
+           
+            rb2d.transform.rotation = Quaternion.Euler(Vector3.zero);
+            ResetGroundPosition();
             attackCurrentCount = attackMaxCount;
             rb2d.gravityScale = 4;
             attackDelay = 0;
@@ -116,6 +139,8 @@ public class PlayerMoveController : MonoBehaviour
         if (isAttacking == true && isBouncing == false)
         {
             //Stop any speed and gravity that affected player, and then move within linear time toward target
+            groundPos.transform.parent = null;
+            rb2d.transform.rotation = Quaternion.Euler(new Vector3(0,0,aimScript.mouseAngle));
             rb2d.velocity = Vector3.zero;
             rb2d.gravityScale = 0;
             attackDelay -= Time.deltaTime;
@@ -124,19 +149,29 @@ public class PlayerMoveController : MonoBehaviour
             //If the attack is finished, set gravity to normal
             if (attackDelay <= 0)
             {
+                ResetGroundPosition();
+                rb2d.transform.rotation = Quaternion.Euler(Vector3.zero);
                 rb2d.gravityScale = 4;
                 attackDelay = 0;
                 isAbleToAttack = true;
                 isAttacking = false;
-                pointerSprite.enabled = true;
+                pointerSprite.enabled = true;          
             }
             if (attackCurrentCount <= 0)
             {
                 pointerSprite.enabled = false; //Pointer Sprite renderer
             }
         }
-      
 
+        Debug.Log(groundPos.localPosition);
+    }
+    void ResetGroundPosition()
+    {
+        groundPos.parent = this.gameObject.transform;
+        groundPos.position = rb2d.transform.position;
+        groundPos.rotation = rb2d.transform.rotation;
+        groundPos.localScale = Vector3.one;
+        groundPos.localPosition = new Vector3(groundPos.localPosition.x, groundPos.localPosition.y + -0.8f, groundPos.localPosition.z);
     }
     public bool Attacking
     {
@@ -171,12 +206,10 @@ public class PlayerMoveController : MonoBehaviour
             case PlayerState.JUMPING:
                 animName = "characterJump";
                 break;
-            case PlayerState.BOUNCING:
-                animName = "characterBounce";
-                break;
             case PlayerState.ATTACKING:
                 animName = "characterAttack";
                 aimScript.FacingState();
+                aimScript.Angle();
                 pointerSprite.enabled = false; //Pointer Sprite renderer
                 currentTarget = aimTarget.position; //Set current target with aim target coordinate 1 time so it doesn't keep overwrite the value every update
                 attackDelay = 0.4f; //Time before player could attack again
