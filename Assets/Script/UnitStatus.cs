@@ -51,7 +51,7 @@ public class UnitStatus : MonoBehaviour
     {
         currentHP = maxHP;
         collider.enabled = true;
-        spriteRenderer.color = Color.red;
+        spriteRenderer.color = Color.white;
     }
 
     public int HealthPoint
