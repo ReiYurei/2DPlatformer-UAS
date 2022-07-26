@@ -44,6 +44,15 @@ TextureImporter:
   - first:
       213: -1933986997547825586
     second: Spirtesheet 1_7
+  - first:
+      213: 8865054911408529120
+    second: Spirtesheet 1_8
+  - first:
+      213: -8723352540332375839
+    second: Spirtesheet 1_4
+  - first:
+      213: -4062894257493191866
+    second: Spirtesheet 1_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -196,27 +205,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spirtesheet 1_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 64
-        width: 128
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1fbef9ddfe95d7460800000000000000
-      internalID: 7241042662631926769
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Spirtesheet 1_5
       rect:
         serializedVersion: 2
@@ -275,6 +263,69 @@ TextureImporter:
       bones: []
       spriteID: e4600fa82191925e0800000000000000
       internalID: -1933986997547825586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spirtesheet 1_8
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ee56dc0970070b70800000000000000
+      internalID: 8865054911408529120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spirtesheet 1_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e0ccf6351d60f680800000000000000
+      internalID: -8723352540332375839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spirtesheet 1_9
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 643d42ee233bd97c0800000000000000
+      internalID: -4062894257493191866
       vertices: []
       indices: 
       edges: []

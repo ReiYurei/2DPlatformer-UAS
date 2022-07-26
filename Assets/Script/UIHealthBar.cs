@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.UI;
+using UnityEngine.UI;
 
 public class UIHealthBar : MonoBehaviour
 {
    
     public UnitStatus status;
-   // publicSlider slider;
+    public Slider slider;
 
     void Update()
     {
@@ -15,7 +15,7 @@ public class UIHealthBar : MonoBehaviour
     }
     public void SetHealth()
     {
-       // slider.highValue = status.maxHP;
+      //  slider.highValue = status.maxHP;
       //  slider.value = status.HealthPoint;
     }
 
