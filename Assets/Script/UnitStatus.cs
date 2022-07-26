@@ -44,7 +44,7 @@ public class UnitStatus : MonoBehaviour
     public void DisabledState()
     {
         collider.enabled = false;
-        spriteRenderer.color = Color.black;
+        spriteRenderer.color = new Color(1,0,0,0.5f);
 
     }
     public void Respawn()
@@ -53,6 +53,7 @@ public class UnitStatus : MonoBehaviour
         collider.enabled = true;
         spriteRenderer.color = Color.red;
     }
+
     public int HealthPoint
     {
         get { return currentHP; }

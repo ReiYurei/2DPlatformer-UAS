@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Aim
   - Hurtbox
+  - UI
   layers:
   - Default
   - TransparentFX

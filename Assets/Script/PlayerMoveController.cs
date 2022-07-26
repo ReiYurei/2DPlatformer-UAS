@@ -173,10 +173,15 @@ public class PlayerMoveController : MonoBehaviour
         groundPos.localScale = Vector3.one;
         groundPos.localPosition = new Vector3(groundPos.localPosition.x, groundPos.localPosition.y + -0.8f, groundPos.localPosition.z);
     }
-    public bool Attacking
+    public int CurrentAttackCount
     {
-        get { return isAttacking; }
-        set { isAttacking = value; }
+        get { return attackCurrentCount; }
+        set { attackCurrentCount = value; }
+    }
+    public bool AbleToAttacking
+    {
+        get { return isAbleToAttack; }
+        set { isAbleToAttack = value; }
     }
     public bool Bouncing
     {
