@@ -124,14 +124,10 @@ public class PlayerMoveController : MonoBehaviour
         if (isBouncing == true)
         {
            
-            rb2d.transform.rotation = Quaternion.Euler(Vector3.zero);
+            
             ResetGroundPosition();
-            attackCurrentCount = attackMaxCount;
-            rb2d.gravityScale = 4;
-            attackDelay = 0;
-            isAbleToAttack = true;
-            isAttacking = false;
-            pointerSprite.enabled = true;
+            ResetStatus();
+            attackCurrentCount = attackMaxCount;      
             isBouncing = false;
         }
  
@@ -146,16 +142,11 @@ public class PlayerMoveController : MonoBehaviour
             attackDelay -= Time.deltaTime;
             rb2d.position = Vector3.Lerp(transform.position, currentTarget, 6f * Time.fixedDeltaTime);
         
-            //If the attack is finished, set gravity to normal
+            //If the attack is finished, set every important aspect to normal
             if (attackDelay <= 0)
             {
                 ResetGroundPosition();
-                rb2d.transform.rotation = Quaternion.Euler(Vector3.zero);
-                rb2d.gravityScale = 4;
-                attackDelay = 0;
-                isAbleToAttack = true;
-                isAttacking = false;
-                pointerSprite.enabled = true;          
+                ResetStatus();     
             }
             if (attackCurrentCount <= 0)
             {
@@ -164,6 +155,15 @@ public class PlayerMoveController : MonoBehaviour
         }
 
         Debug.Log(groundPos.localPosition);
+    }
+    void ResetStatus()
+    {
+        rb2d.transform.rotation = Quaternion.Euler(Vector3.zero);
+        rb2d.gravityScale = 4;
+        attackDelay = 0;
+        isAbleToAttack = true;
+        isAttacking = false;
+        pointerSprite.enabled = true;
     }
     void ResetGroundPosition()
     {

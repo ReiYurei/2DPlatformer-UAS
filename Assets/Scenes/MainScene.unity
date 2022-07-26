@@ -1944,29 +1944,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 929978433236923778, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 929978433236923783, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 929978433426818473, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 929978433426818473, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 929978433426818473, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 929978433426818473, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 929978433965384248, guid: d68629fc7f7b10143834c11e471ace6f, type: 3}
       propertyPath: m_RootOrder
