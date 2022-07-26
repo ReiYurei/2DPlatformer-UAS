@@ -18,6 +18,7 @@ public class UnitStatus : MonoBehaviour
     {
         spriteRenderer = this.GetComponent<SpriteRenderer>();
         collider = this.GetComponent<Collider2D>();
+        currentHP = maxHP;
     }
     public void PlayerDealDamage(int dmg)
     {

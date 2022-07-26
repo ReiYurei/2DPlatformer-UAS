@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+//using UnityEngine.UI;
 
 public class UIHealthBar : MonoBehaviour
 {
    
-    private UnitStatus status;
-    [SerializeField]public Slider slider;
+    public UnitStatus status;
+   // publicSlider slider;
 
+    void Update()
+    {
+        SetHealth();     
+    }
     public void SetHealth()
     {
-        slider.highValue = status.maxHP;
-        slider.value = status.HealthPoint;
+       // slider.highValue = status.maxHP;
+      //  slider.value = status.HealthPoint;
     }
 
 }

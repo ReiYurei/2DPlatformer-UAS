@@ -53,6 +53,7 @@ public class PlayerMoveController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(status.HealthPoint);
         //Moving
         var movement = Input.GetAxis("Horizontal");
         if (movement != 0 && isAbleToAttack == true)
