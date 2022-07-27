@@ -18,9 +18,11 @@ public class UIHealthBar : MonoBehaviour
     void LateUpdate()
     {
         SetHealth();
-        if (status.HealthPoint <= 0)
+        if (status.HealthPoint == 0)
         {
             status.PlayerDie();
+            status.DisabledState();
+            status.HealthPoint = -1;
         }
         SetJump();
     }

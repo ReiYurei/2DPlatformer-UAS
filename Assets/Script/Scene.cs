@@ -16,18 +16,23 @@ public class Scene : MonoBehaviour
     }
     public void ChangeScene()
     {
-        if (transitionScript.IsChangeScene == true && levelIndex == 0)
+        if (transitionScript.IsChangeScene == true && levelIndex == 0 && transitionScript.dying == false)
         {
             StartCoroutine(LoadNextStage(1));
             transitionScript.IsChangeScene = false;
         }
-        else if (transitionScript.IsChangeScene == true && levelIndex < 0)
+        else if (transitionScript.IsChangeScene == true && levelIndex < 0 && transitionScript.dying == false)
         {
 
             StartCoroutine(LoadNextStage(0));
             transitionScript.IsChangeScene = false;
         }
-
+        else if (transitionScript.IsChangeScene == true && transitionScript.dying == true)
+        {
+            StartCoroutine(LoadNextStage(levelIndex));
+            transitionScript.IsChangeScene = false;
+            transitionScript.dying = false;
+        }
     }
     IEnumerator LoadNextStage(int level)
     {

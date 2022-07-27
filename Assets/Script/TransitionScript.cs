@@ -11,6 +11,7 @@ public class TransitionScript : MonoBehaviour
     private Transform spawnPoint;
     private Animator animator;
     private bool isChangeScene = false;
+    public bool dying;
     private void Awake()
     {
         timerScript = GameObject.FindGameObjectWithTag("Timer").GetComponent<TextScript>();
@@ -22,18 +23,14 @@ public class TransitionScript : MonoBehaviour
     }
     private void LateUpdate()
     {
-        TransitionStart();
         NextLevelStart();
     }
-    public void Spawn()
-    {
-        animator.Play("UITransitionEnd");
-    }
+
     public void TransitionStart()
     {
         if (status.IsDie == true)
         {
-            status.IsDie = false;
+            dying = true;
             animator.Play("UITransition");
         }
     }
@@ -51,16 +48,24 @@ public class TransitionScript : MonoBehaviour
             timerScript.ActivateTimer = false;
             if (Input.GetMouseButtonDown(0))
             {
-                timerScript.isResultScreen = false; 
+                timerScript.isResultScreen = false;
                 timerScript.scoreObject.SetActive(false);
                 finishLine.IsGoalReached = false;
                 animator.Play("UINextLevelTransitionStart");
             }
-            
+
+        }
+        if (status.IsDie == true)
+        {
+            dying = true;
+            status.IsDie = false;
+            player.transform.position = new Vector3(player.position.x,player.position.y - 4, player.position.z);
+            animator.Play("UINextLevelTransitionStart");
         }
     }
     public void ChangeSceneCondition()
     {
+
         isChangeScene = true;
         animator.Play("UITransitionFull");
 
