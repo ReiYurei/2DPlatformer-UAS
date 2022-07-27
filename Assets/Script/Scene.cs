@@ -9,7 +9,11 @@ public class Scene : MonoBehaviour
         MainScene,Stage2
     }
     public TransitionScript transitionScript;
-    private int levelIndex =0;
+    private int levelIndex;
+    private void Start()
+    {
+        levelIndex = SceneManager.GetActiveScene().buildIndex;
+    }
     public void LateUpdate()
     {
         ChangeScene();
