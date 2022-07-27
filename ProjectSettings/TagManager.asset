@@ -10,6 +10,7 @@ TagManager:
   - Hurtbox
   - UI
   - SpawnPoint
+  - FinishPoint
   layers:
   - Default
   - TransparentFX

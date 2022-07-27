@@ -13,12 +13,12 @@ public class UnitStatus : MonoBehaviour
     private int currentHP;
     public float respawnTime;
 
-    private Collider2D collider;
+    private Collider2D spriteCollider;
     private SpriteRenderer spriteRenderer;
-    private void Start()
+    private void Awake()
     {
         spriteRenderer = this.GetComponent<SpriteRenderer>();
-        collider = this.GetComponent<Collider2D>();
+        spriteCollider = this.GetComponent<Collider2D>();
         currentHP = maxHP;
     }
     public void PlayerDealDamage(int dmg)
@@ -38,21 +38,21 @@ public class UnitStatus : MonoBehaviour
     }
     public void EnabledState()
     {
-        collider.enabled = true;
+        spriteCollider.enabled = true;
         spriteRenderer.color = Color.white;
     }
 
     public void DisabledState()
     {
-        collider.enabled = false;
+        spriteCollider.enabled = false;
         spriteRenderer.color = new Color(1,0,0,0.5f);
 
     }
     public void Respawn()
     {
         currentHP = maxHP;
-        collider.enabled = true;
-        spriteRenderer.color = Color.red;
+        spriteCollider.enabled = true;
+        spriteRenderer.color = Color.white;
     }
     public void PlayerDie()
     {

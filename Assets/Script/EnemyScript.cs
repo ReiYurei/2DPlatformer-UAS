@@ -8,13 +8,25 @@ public class EnemyScript : MonoBehaviour
     private BoxCollider2D hitboxCollider;
     private Rigidbody2D targetRb;
     private PlayerMoveController playerScript;
+    private Animator animator;
     private void Start()
     {
+        animator = this.GetComponent<Animator>();
         unitStat = this.GetComponent<UnitStatus>();
         targetRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoveController>();
     }
-
+    public void Update()
+    {
+        if (unitStat.HealthPoint > 0)
+        {
+            animator.Play("enemyIdle");
+        }
+        else
+        {
+            animator.StopPlayback();
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Hitbox"))
