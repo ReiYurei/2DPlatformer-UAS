@@ -18,19 +18,21 @@ public class Scene : MonoBehaviour
     {
         if (transitionScript.IsChangeScene == true && levelIndex == 0)
         {
-            StartCoroutine(LoadNextStage());
+            StartCoroutine(LoadNextStage(1));
             transitionScript.IsChangeScene = false;
         }
         else if (transitionScript.IsChangeScene == true && levelIndex < 0)
         {
 
+            StartCoroutine(LoadNextStage(0));
+            transitionScript.IsChangeScene = false;
         }
 
     }
-    IEnumerator LoadNextStage()
+    IEnumerator LoadNextStage(int level)
     {
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene(SceneType.Stage2.ToString());
+        SceneManager.LoadScene(level);
         levelIndex = SceneManager.GetActiveScene().buildIndex;
     }
 }
