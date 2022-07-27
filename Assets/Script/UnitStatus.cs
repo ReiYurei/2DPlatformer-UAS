@@ -51,6 +51,7 @@ public class UnitStatus : MonoBehaviour
     public void Respawn()
     {
         currentHP = maxHP;
+<<<<<<< HEAD
         spriteCollider.enabled = true;
         spriteRenderer.color = Color.white;
     }
@@ -62,6 +63,10 @@ public class UnitStatus : MonoBehaviour
     {
         get { return isDie; }
         set { isDie = value; }
+=======
+        collider.enabled = true;
+        spriteRenderer.color = Color.white;
+>>>>>>> ver-1.1
     }
     public int HealthPoint
     {
