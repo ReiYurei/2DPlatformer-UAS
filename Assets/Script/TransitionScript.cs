@@ -4,32 +4,36 @@ using UnityEngine;
 
 public class TransitionScript : MonoBehaviour
 {
-    public UnitStatus status;
-    public Transform player;
-    public Transform spawnPoint;
-    public Animator animator;
-    private void start()
+    private UnitStatus status;
+    private Transform player;
+    private Transform spawnPoint;
+    private Animator animator;
+    private void Awake()
     {
-        player = GetComponent<Transform>();
-        spawnPoint = GetComponent<Transform>();
-        status = GetComponent<UnitStatus>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").GetComponent<Transform>();
+        animator = this.GetComponent<Animator>();
+        status = GameObject.FindGameObjectWithTag("Player").GetComponent<UnitStatus>();
     }
-    private void LateUpdate()
+    private void Update()
     {
-        if (status.HealthPoint <= 0)
+        TransitionStart();
+    }
+    public void TransitionStart()
+    {
+        if (status.IsDie == true)
         {
+            status.IsDie = false;
             animator.Play("UITransition");
- 
         }
     }
     public void Spawn()
     {
-        animator.Play("UITransitioneND");
+        animator.Play("UITransitionEnd");
     }
     public void TransitionEnd()
     {
         player.transform.position = spawnPoint.position;
         status.HealthPoint = status.maxHP;
-        Time.timeScale = 1.0f;
     }
 }

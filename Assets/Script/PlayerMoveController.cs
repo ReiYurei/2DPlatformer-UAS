@@ -139,6 +139,7 @@ public class PlayerMoveController : MonoBehaviour
             rb2d.transform.rotation = Quaternion.Euler(new Vector3(0,0,aimScript.mouseAngle));
             rb2d.velocity = Vector3.zero;
             rb2d.gravityScale = 0;
+          
             attackDelay -= Time.deltaTime;
             rb2d.position = Vector3.Lerp(transform.position, currentTarget, 6f * Time.fixedDeltaTime);
         

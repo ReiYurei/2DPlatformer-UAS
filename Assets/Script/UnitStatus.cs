@@ -7,6 +7,7 @@ public class UnitStatus : MonoBehaviour
     public string unitName;
     public int dmgDeal;
     public float recoveryTime;
+    private bool isDie = false;
 
     public int maxHP;
     private int currentHP;
@@ -53,7 +54,15 @@ public class UnitStatus : MonoBehaviour
         collider.enabled = true;
         spriteRenderer.color = Color.red;
     }
-
+    public void PlayerDie()
+    {
+        isDie = true;
+    }
+    public bool IsDie
+    {
+        get { return isDie; }
+        set { isDie = value; }
+    }
     public int HealthPoint
     {
         get { return currentHP; }

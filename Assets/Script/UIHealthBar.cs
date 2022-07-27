@@ -15,9 +15,13 @@ public class UIHealthBar : MonoBehaviour
     public Gradient gradient;
     public Image fill;
 
-    void Update()
+    void LateUpdate()
     {
         SetHealth();
+        if (status.HealthPoint <= 0)
+        {
+            status.PlayerDie();
+        }
         SetJump();
     }
 

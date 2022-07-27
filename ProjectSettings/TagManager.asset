@@ -9,6 +9,7 @@ TagManager:
   - Aim
   - Hurtbox
   - UI
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

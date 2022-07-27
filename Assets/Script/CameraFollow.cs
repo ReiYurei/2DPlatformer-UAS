@@ -6,9 +6,10 @@ public class CameraFollow : MonoBehaviour
 {
     public Transform target;
     public Vector3 offset;
+    private Vector3 velocity = Vector3.zero;
 
     public float smoothSpeed = 6f; 
-    void FixedUpdate()
+    void LateUpdate()
     {
 
         Vector3 desiredPos;
@@ -16,14 +17,14 @@ public class CameraFollow : MonoBehaviour
         if (target.transform.position.x <= 4)
         {
             desiredPos = new Vector3(0, target.position.y, offset.z);
-            smoothedPos = Vector3.Lerp(transform.position, desiredPos, smoothSpeed * Time.deltaTime);
+            smoothedPos = Vector3.SmoothDamp(transform.position, desiredPos, ref velocity, smoothSpeed * Time.deltaTime);
             transform.position = smoothedPos;
 
         }
-        else if (target.transform.position.x >= 4)
+        else// if (target.transform.position.x >= 4)
         {
             desiredPos = new Vector3(target.position.x, target.position.y, offset.z);
-            smoothedPos = Vector3.Lerp(transform.position, desiredPos, smoothSpeed * Time.deltaTime);
+            smoothedPos = Vector3.SmoothDamp(transform.position, desiredPos, ref velocity, smoothSpeed * Time.deltaTime);
             transform.position = smoothedPos;
         }
 
