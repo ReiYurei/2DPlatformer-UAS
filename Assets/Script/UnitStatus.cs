@@ -16,7 +16,6 @@ public class UnitStatus : MonoBehaviour
 
     private Collider2D spriteCollider;
     private SpriteRenderer spriteRenderer;
-    private List<Vector3> goombaSpawnPos;
 
     private void Awake()
     {
