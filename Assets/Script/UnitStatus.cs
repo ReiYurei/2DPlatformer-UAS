@@ -8,6 +8,7 @@ public class UnitStatus : MonoBehaviour
     public int dmgDeal;
     public float recoveryTime;
     private bool isDie = false;
+    private int deathCounter;
 
     public int maxHP;
     private int currentHP;
@@ -57,6 +58,12 @@ public class UnitStatus : MonoBehaviour
     public void PlayerDie()
     {
         isDie = true;
+        deathCounter++;
+    }
+    public int DeathCounter
+    {
+        get { return deathCounter; }
+        set { deathCounter = value; }
     }
     public bool IsDie
     {

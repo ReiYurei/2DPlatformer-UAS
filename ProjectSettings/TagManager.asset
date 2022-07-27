@@ -11,6 +11,7 @@ TagManager:
   - UI
   - SpawnPoint
   - FinishPoint
+  - Timer
   layers:
   - Default
   - TransparentFX

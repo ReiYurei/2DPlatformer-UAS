@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TransitionScript : MonoBehaviour
 {
+    private TextScript timerScript;
     private FinishLineScript finishLine;
     private UnitStatus status;
     private Transform player;
@@ -12,6 +13,7 @@ public class TransitionScript : MonoBehaviour
     private bool isChangeScene = false;
     private void Awake()
     {
+        timerScript = GameObject.FindGameObjectWithTag("Timer").GetComponent<TextScript>();
         finishLine = GameObject.FindGameObjectWithTag("FinishPoint").GetComponent<FinishLineScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").GetComponent<Transform>();
@@ -44,8 +46,17 @@ public class TransitionScript : MonoBehaviour
     {
         if (finishLine.IsGoalReached == true)
         {
-            finishLine.IsGoalReached = false;
-            animator.Play("UINextLevelTransitionStart");
+            timerScript.isResultScreen = true;
+            timerScript.Calculate();
+            timerScript.ActivateTimer = false;
+            if (Input.GetMouseButtonDown(0))
+            {
+                timerScript.isResultScreen = false; 
+                timerScript.scoreObject.SetActive(false);
+                finishLine.IsGoalReached = false;
+                animator.Play("UINextLevelTransitionStart");
+            }
+            
         }
     }
     public void ChangeSceneCondition()
