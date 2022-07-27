@@ -9,24 +9,19 @@ public class Scene : MonoBehaviour
         MainScene,Stage2
     }
     public TransitionScript transitionScript;
-    private int levelIndex;
-    private void Awake()
-    {
-        SceneManager.LoadScene(SceneType.MainScene.ToString());
-        levelIndex = SceneManager.GetActiveScene().buildIndex;
-    }
+    private int levelIndex =0;
     public void LateUpdate()
     {
         ChangeScene();
     }
     public void ChangeScene()
     {
-        if (transitionScript.IsChangeScene == true && levelIndex <= 0)
+        if (transitionScript.IsChangeScene == true && levelIndex == 0)
         {
             StartCoroutine(LoadNextStage());
             transitionScript.IsChangeScene = false;
         }
-        else if (transitionScript.IsChangeScene == true && levelIndex <= 0)
+        else if (transitionScript.IsChangeScene == true && levelIndex < 0)
         {
 
         }
