@@ -32,22 +32,24 @@ public class TextScript : MonoBehaviour
         }
         else if (timeActive == false && isResultScreen == true)
         {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position
+                = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position;
             timertText.enabled = false;
             deathText.enabled = false;
-            
+
             scoreObject.SetActive(true);
             scoreText.text = score.ToString();
         }
+
         deathText.text = status.DeathCounter.ToString();
-        Debug.Log(timer);
     }
     public void Calculate()
     {
 
         score = Mathf.RoundToInt(timer);
-        score = score * 5000;
+        score = score * 10000;
         score = 999990 - score;
-        score = score - status.DeathCounter * 10000;
+        
 
     }
     public bool IsCalculate

@@ -8,7 +8,7 @@ public class CameraFollow : MonoBehaviour
     public Vector3 offset;
     private Vector3 velocity = Vector3.zero;
 
-    public float smoothSpeed = 10000f;
+    public float smoothSpeed = 100f;
     private void Awake()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
@@ -18,14 +18,14 @@ public class CameraFollow : MonoBehaviour
 
         Vector3 desiredPos;
         Vector3 smoothedPos;
-        if (target.transform.position.x <= 4)
+        if (target.transform.position.x < -0.7f)
         {
             desiredPos = new Vector3(0, target.position.y, offset.z);
             smoothedPos = Vector3.SmoothDamp(transform.position, desiredPos, ref velocity, smoothSpeed * Time.deltaTime);
             transform.position = smoothedPos;
 
         }
-        else// if (target.transform.position.x >= 4)
+        else if (target.transform.position.x > -0.7f)
         {
             desiredPos = new Vector3(target.position.x, target.position.y, offset.z);
             smoothedPos = Vector3.SmoothDamp(transform.position, desiredPos, ref velocity, smoothSpeed * Time.deltaTime);

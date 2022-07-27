@@ -12,6 +12,7 @@ TagManager:
   - SpawnPoint
   - FinishPoint
   - Timer
+  - Spawner
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - 
-  - 
+  - Goomba
+  - Flyer
   - 
   - 
   - 

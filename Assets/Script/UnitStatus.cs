@@ -8,7 +8,7 @@ public class UnitStatus : MonoBehaviour
     public int dmgDeal;
     public float recoveryTime;
     private bool isDie = false;
-    private int deathCounter;
+    private int deathCounter = 1;
 
     public int maxHP;
     private int currentHP;
@@ -16,6 +16,8 @@ public class UnitStatus : MonoBehaviour
 
     private Collider2D spriteCollider;
     private SpriteRenderer spriteRenderer;
+    private List<Vector3> goombaSpawnPos;
+
     private void Awake()
     {
         spriteRenderer = this.GetComponent<SpriteRenderer>();
@@ -27,8 +29,8 @@ public class UnitStatus : MonoBehaviour
         currentHP -= dmg;
         if (currentHP <= 0)
         {
-            DisabledState();
-            Invoke("Respawn", respawnTime);
+
+            Object.Destroy(this.gameObject);
         }      
     }
     public void PlayerGetHit(int dmg)
@@ -51,14 +53,13 @@ public class UnitStatus : MonoBehaviour
     }
     public void Respawn()
     {
-        currentHP = maxHP;
-        spriteCollider.enabled = true;
-        spriteRenderer.color = Color.white;
+      
     }
     public void PlayerDie()
     {
         isDie = true;
-        deathCounter++;
+        deathCounter--;
+
     }
     public int DeathCounter
     {
