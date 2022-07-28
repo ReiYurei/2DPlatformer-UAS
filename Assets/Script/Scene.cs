@@ -17,6 +17,12 @@ public class Scene : MonoBehaviour
     public void LateUpdate()
     {
         ChangeScene();
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            transitionScript.Restart();
+            transitionScript.dying = true;
+        }
+;
     }
     public void ChangeScene()
     {
@@ -25,7 +31,7 @@ public class Scene : MonoBehaviour
             StartCoroutine(LoadNextStage(1));
             transitionScript.IsChangeScene = false;
         }
-        else if (transitionScript.IsChangeScene == true && levelIndex < 0 && transitionScript.dying == false)
+        else if (transitionScript.IsChangeScene == true && levelIndex > 0 && transitionScript.dying == false)
         {
 
             StartCoroutine(LoadNextStage(0));

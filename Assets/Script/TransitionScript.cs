@@ -39,6 +39,10 @@ public class TransitionScript : MonoBehaviour
         player.transform.position = spawnPoint.position;
         status.HealthPoint = status.maxHP;
     }
+    public void Restart()
+    {
+        animator.Play("UINextLevelTransitionStart");
+    }
     public void NextLevelStart()
     {
         if (finishLine.IsGoalReached == true)

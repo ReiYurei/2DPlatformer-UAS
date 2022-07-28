@@ -13,7 +13,7 @@ public class Spike : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        status.PlayerGetHit(status.maxHP);
+        status.PlayerGetHit(status.HealthPoint);
     }
 
 
