@@ -8,7 +8,7 @@ public class UnitStatus : MonoBehaviour
     public int dmgDeal;
     public float recoveryTime;
     private bool isDie = false;
-    private int deathCounter = 1;
+    private int deathCounter = 0;
 
     public int maxHP;
     private int currentHP;
@@ -28,9 +28,10 @@ public class UnitStatus : MonoBehaviour
         currentHP -= dmg;
         if (currentHP <= 0)
         {
+            DisabledState();
+            Invoke("EnabledState", recoveryTime);
 
-            Object.Destroy(this.gameObject);
-        }      
+        }
     }
     public void PlayerGetHit(int dmg)
     {
@@ -48,16 +49,11 @@ public class UnitStatus : MonoBehaviour
     {
         spriteCollider.enabled = false;
         spriteRenderer.color = new Color(1,0,0,0.5f);
-
-    }
-    public void Respawn()
-    {
-      
     }
     public void PlayerDie()
     {
+        DisabledState();
         isDie = true;
-        deathCounter--;
 
     }
     public int DeathCounter

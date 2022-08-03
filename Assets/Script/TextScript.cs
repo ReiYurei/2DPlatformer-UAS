@@ -47,8 +47,9 @@ public class TextScript : MonoBehaviour
     {
 
         score = Mathf.RoundToInt(timer);
-        score = score * 10000;
-        score = 999990 - score;
+        int deathPenalty = status.DeathCounter * 10000;
+        score = score * 5000;
+        score = 999990 - (score + deathPenalty);
         
 
     }

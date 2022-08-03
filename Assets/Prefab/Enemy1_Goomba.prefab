@@ -138,7 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Goomba
   dmgDeal: 1
-  recoveryTime: 0
+  recoveryTime: 5
   maxHP: 1
   respawnTime: 5
 --- !u!95 &778435805

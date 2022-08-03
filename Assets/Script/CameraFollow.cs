@@ -11,7 +11,7 @@ public class CameraFollow : MonoBehaviour
     public Vector3 offset;
     private Vector3 velocity = Vector3.zero;
 
-    public float smoothSpeed = 10f;
+    public float smoothSpeed = 2f;
     private void Start()
     {
         cam = GetComponent<Camera>();

@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: -10}
-  smoothSpeed: 50
+  smoothSpeed: 10
 --- !u!50 &569784318
 Rigidbody2D:
   serializedVersion: 4

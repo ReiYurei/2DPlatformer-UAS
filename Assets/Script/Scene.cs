@@ -17,11 +17,11 @@ public class Scene : MonoBehaviour
     public void LateUpdate()
     {
         ChangeScene();
-        if (Input.GetKeyDown(KeyCode.R))
+        /*if (Input.GetKeyDown(KeyCode.R))
         {
             transitionScript.Restart();
             transitionScript.dying = true;
-        }
+        }*/
 ;
     }
     public void ChangeScene()
@@ -37,12 +37,12 @@ public class Scene : MonoBehaviour
             StartCoroutine(LoadNextStage(0));
             transitionScript.IsChangeScene = false;
         }
-        else if (transitionScript.IsChangeScene == true && transitionScript.dying == true)
+      /*  else if (transitionScript.IsChangeScene == true && transitionScript.dying == true)
         {
             StartCoroutine(LoadNextStage(levelIndex));
             transitionScript.IsChangeScene = false;
             transitionScript.dying = false;
-        }
+        } */
     }
     IEnumerator LoadNextStage(int level)
     {

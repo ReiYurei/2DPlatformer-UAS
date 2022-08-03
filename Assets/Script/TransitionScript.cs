@@ -23,6 +23,7 @@ public class TransitionScript : MonoBehaviour
     }
     private void LateUpdate()
     {
+        TransitionStart();
         NextLevelStart();
     }
 
@@ -30,12 +31,15 @@ public class TransitionScript : MonoBehaviour
     {
         if (status.IsDie == true)
         {
-            dying = true;
             animator.Play("UITransition");
+            status.IsDie = false;
         }
     }
     public void TransitionEnd()
     {
+        animator.Play("UITransitionEnd");
+        status.EnabledState();
+        status.DeathCounter++;
         player.transform.position = spawnPoint.position;
         status.HealthPoint = status.maxHP;
     }
@@ -59,13 +63,13 @@ public class TransitionScript : MonoBehaviour
             }
 
         }
-        if (status.IsDie == true)
+       /* if (status.IsDie == true)
         {
             dying = true;
             status.IsDie = false;
             player.transform.position = new Vector3(player.position.x,player.position.y - 4, player.position.z);
             animator.Play("UINextLevelTransitionStart");
-        }
+        }*/
     }
     public void ChangeSceneCondition()
     {

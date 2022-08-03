@@ -21,9 +21,9 @@ public class UIHealthBar : MonoBehaviour
         if (status.HealthPoint == 0)
         {
             status.PlayerDie();
-            status.DisabledState();
             status.HealthPoint = -1;
         }
+
         SetJump();
     }
 
